@@ -10,9 +10,17 @@ body {
     background-position: 50%;
     background-size: cover;
     display: flex;
+    justify-content: space-between;
     height: 100vh;
     width: 100vw;
-    
+    left: 10px;
+    right: 10px;
+    color: white;
+    text-align: center;
+}
+
+p {
+    margin: 10px;
 }
 
 .ancients {
@@ -20,7 +28,7 @@ body {
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
-    width: 650px;
+    width: 700px;
     height: 100vh;
 }
 
@@ -38,7 +46,7 @@ body {
 
 .shubNiggurath {
     background-image: url(./assets/Ancients/ShubNiggurath.png);
-    
+
 }
 
 .block {
@@ -54,11 +62,13 @@ body {
 }
 
 .difficultyLevel {
-    display: flex;
+    display: none;
     justify-content: center;
     flex-direction: column;
     align-items: center;
 }
+
+
 
 .diff {
     position: relative;
@@ -83,4 +93,86 @@ body {
     position: relative;
     z-index: 100;
     background-image: url(./assets/frameDiffActive.png);
+}
+
+.deck {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 700px;
+}
+
+.kneadDeck {
+    background-image: url(./assets/frameDiff.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width: 200px;
+    height: 40px;
+    color: white;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+
+
+.green {
+    width: 50px;
+    height: 50px;
+    background: rgb(27, 112, 27);
+    border-radius: 50%;
+    margin: 5px;
+}
+
+.brown {
+    width: 50px;
+    height: 50px;
+    background: rgb(189, 159, 63);
+    border-radius: 50%;
+    margin: 5px;
+}
+
+.blue {
+    width: 50px;
+    height: 50px;
+    background: rgb(74, 74, 180);
+    border-radius: 50%;
+    margin: 5px;
+}
+
+.firstStage {
+    display: flex;
+    color: white;
+}
+
+.secondStage {
+    display: flex;
+    color: white;
+}
+
+.thirdStage {
+    display: flex;
+    color: white;
+}
+
+.counter {
+    display: none;
+    flex-direction: column;
+}
+
+.cardBackground {
+    display: none;
+    margin: 20px;
+}
+
+.droppedCard {
+    display: none;
+    margin: 10px;
+}
+
+.openDiff {
+    display: flex;
 }

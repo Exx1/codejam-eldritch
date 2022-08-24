@@ -3,7 +3,7 @@ import blueCardsAssets from '../../../assets/MythicCards/blue';
 const cardsData = [
   {
     id: 'blue1',
-    cardFace: blueCardsAssets.blue1,
+    cardFace: "./assets/MythicCards/blue/blue1.png",
     difficulty: 'hard',
     color:'blue'
   },
