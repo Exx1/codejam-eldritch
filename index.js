@@ -309,15 +309,99 @@ const cardsData = [
     },
 ]
 
+const ancientsData = [
+    {
+        id: 'azathoth',
+        name: 'azathoth',
+        cardFace: './assets/Ancients/Azathoth.png',
+        firstStage: {
+            greenCards: 1,
+            blueCards: 1,
+            brownCards: 2,
+        },
+        secondStage: {
+            greenCards: 2,
+            blueCards: 1,
+            brownCards: 3,
+        },
+        thirdStage: {
+            greenCards: 2,
+            blueCards: 0,
+            brownCards: 4,
+        },
+    },
+    {
+        id: 'cthulhu',
+        name: 'cthulhu',
+        cardFace: './assets/Ancients/Cthulhu.png',
+        firstStage: {
+            greenCards: 0,
+            blueCards: 2,
+            brownCards: 2,
+        },
+        secondStage: {
+            greenCards: 1,
+            blueCards: 0,
+            brownCards: 3,
+        },
+        thirdStage: {
+            greenCards: 3,
+            blueCards: 0,
+            brownCards: 4,
+        },
+    },
+    {
+        id: 'iogSothoth',
+        name: 'iogSothoth',
+        cardFace: './assets/Ancients/iogSothoth.png',
+        firstStage: {
+            greenCards: 0,
+            blueCards: 1,
+            brownCards: 2,
+        },
+        secondStage: {
+            greenCards: 2,
+            blueCards: 1,
+            brownCards: 3,
+        },
+        thirdStage: {
+            greenCards: 3,
+            blueCards: 0,
+            brownCards: 4,
+        },
+    },
+    {
+        id: 'shubNiggurath',
+        name: 'shubNiggurath',
+        cardFace: './assets/Ancients/shubNiggurath.png',
+        firstStage: {
+            greenCards: 1,
+            blueCards: 1,
+            brownCards: 2,
+        },
+        secondStage: {
+            greenCards: 3,
+            blueCards: 1,
+            brownCards: 2,
+        },
+        thirdStage: {
+            greenCards: 2,
+            blueCards: 0,
+            brownCards: 4,
+        },
+    },
+]
+
 let dataVeryEasy = cardsData.filter(item => item.difficulty === 'easy');
 let dataEasy = cardsData.filter(item => item.difficulty === 'easy' || item.difficulty === 'normal');
 let dataNormal = cardsData.filter(item => item.difficulty === 'normal');
 let dataHard = cardsData.filter(item => item.difficulty === 'normal' || item.difficulty === 'hard');
-let dataHardAndVeryHard = cardsData.filter(item.difficulty === 'hard');
+let dataVeryHard = cardsData.filter(item => item.difficulty === 'hard');
 
 
 
 //Ancients
+// выбор древнего
 
 const azathoth = document.querySelector('.azathoth');
 const cthulhu = document.querySelector('.cthulhu');
@@ -328,6 +412,7 @@ const kneadDeck = document.querySelector('.kneadDeck');
 let ancients = '';
 let diffLevel = '';
 
+let selectedAncient;
 
 function activeAzathoth() {
     azathoth.innerHTML = '';
@@ -339,7 +424,8 @@ function activeAzathoth() {
     counter.classList.remove('openDiff');
     cardBackground.classList.remove('openDiff');
     droppedCard.classList.remove('openDiff');
-    ancients = 'Azathoth';
+    ancients = 'azathoth';
+    selectedAncient = ancientsData.find(item => item.id === ancients);
 }
 
 function activeCthulhu() {
@@ -352,7 +438,8 @@ function activeCthulhu() {
     counter.classList.remove('openDiff');
     cardBackground.classList.remove('openDiff');
     droppedCard.classList.remove('openDiff');
-    ancients = 'Cthulhu';
+    ancients = 'cthulhu';
+    selectedAncient = ancientsData.find(item => item.id === ancients);
 }
 
 function activeIogSothoth() {
@@ -365,7 +452,8 @@ function activeIogSothoth() {
     counter.classList.remove('openDiff');
     cardBackground.classList.remove('openDiff');
     droppedCard.classList.remove('openDiff');
-    ancients = 'IogSothoth';
+    ancients = 'iogSothoth';
+    selectedAncient = ancientsData.find(item => item.id === ancients);
 }
 
 function activeShubNiggurath() {
@@ -378,7 +466,8 @@ function activeShubNiggurath() {
     counter.classList.remove('openDiff');
     cardBackground.classList.remove('openDiff');
     droppedCard.classList.remove('openDiff');
-    ancients = 'ShubNiggurath';
+    ancients = 'shubNiggurath';
+    selectedAncient = ancientsData.find(item => item.id === ancients);
 }
 
 azathoth.addEventListener('click', activeAzathoth);
@@ -471,98 +560,37 @@ normal.addEventListener('click', normalActive);
 hard.addEventListener('click', hardActive);
 veryHard.addEventListener('click', veryHardActive);
 
-
-// выбор древнего
-
-const ancientsData = [
-    {
-        id: 'azathoth',
-        name: 'azathoth',
-        cardFace: './assets/Ancients/Azathoth.png',
-        firstStage: {
-            greenCards: 1,
-            blueCards: 1,
-            brownCards: 2,
-        },
-        secondStage: {
-            greenCards: 2,
-            blueCards: 1,
-            brownCards: 3,
-        },
-        thirdStage: {
-            greenCards: 2,
-            blueCards: 0,
-            brownCards: 4,
-        },
-    },
-    {
-        id: 'cthulhu',
-        name: 'cthulhu',
-        cardFace: './assets/Ancients/Cthulhu.png',
-        firstStage: {
-            greenCards: 0,
-            blueCards: 2,
-            brownCards: 2,
-        },
-        secondStage: {
-            greenCards: 1,
-            blueCards: 0,
-            brownCards: 3,
-        },
-        thirdStage: {
-            greenCards: 3,
-            blueCards: 0,
-            brownCards: 4,
-        },
-    },
-    {
-        id: 'iogSothoth',
-        name: 'iogSothoth',
-        cardFace: './assets/Ancients/iogSothoth.png',
-        firstStage: {
-            greenCards: 0,
-            blueCards: 1,
-            brownCards: 2,
-        },
-        secondStage: {
-            greenCards: 2,
-            blueCards: 1,
-            brownCards: 3,
-        },
-        thirdStage: {
-            greenCards: 3,
-            blueCards: 0,
-            brownCards: 4,
-        },
-    },
-    {
-        id: 'shubNiggurath',
-        name: 'shubNiggurath',
-        cardFace: './assets/Ancients/shubNiggurath.png',
-        firstStage: {
-            greenCards: 1,
-            blueCards: 1,
-            brownCards: 2,
-        },
-        secondStage: {
-            greenCards: 3,
-            blueCards: 1,
-            brownCards: 2,
-        },
-        thirdStage: {
-            greenCards: 2,
-            blueCards: 0,
-            brownCards: 4,
-        },
-    },
-]
 ancients = 'azathoth';
-let selectedAncient = ancientsData.find(item => item.id === ancients);
+diffLevel = 'veryEasy';
+selectedAncient = ancientsData.find(item => item.id === ancients);
+let countGreen = selectedAncient.firstStage.greenCards + selectedAncient.secondStage.greenCards + selectedAncient.thirdStage.greenCards;
+let greenPullarr = [];
+let dataNormalGreen = dataNormal.filter(item => item.color === 'green');
+console.log(countGreen)
 
+function greenPull() {
+    if (diffLevel === 'veryEasy') {
+        greenPullarr = dataVeryEasy.filter(item => item.color === 'green');
+        if (greenPullarr.length - 1 < countGreen) {
+            while (greenPullarr.length - 1 < countGreen) {
+                greenPullarr.push(dataNormalGreen[0]);
+            }
+        }
+    }
+}
+
+let brownPullarr = [];
+let bluePullarr = [];
+
+let firstStage = [];
+let secondStage = [];
+let thirdStage = [];
+let greenCards = 0;
+let brownCards = 0;
+let blueCards = 0;
 
 //Замешиваем колоду
 //Очень легкий уровень сложности
-
 
 
 const counter = document.querySelector('.counter');
@@ -570,10 +598,44 @@ const cardBackground = document.querySelector('.cardBackground');
 const droppedCard = document.querySelector('.droppedCard');
 
 function startKneadDeck() {
+    firstStage = [];
+    secondStage = [];
+    thirdStage = [];
+
+    for (let i = 0; i < selectedAncient.firstStage.greenCards; i++) {
+        firstStage.push(dataVeryEasy[i].cardFace);
+    }
+
+    for (let i = 0; i < selectedAncient.firstStage.brownCards; i++) {
+        firstStage.push(dataVeryEasy[i].cardFace);
+    }
+    for (let i = 0; i < selectedAncient.firstStage.blueCards; i++) {
+        firstStage.push(dataVeryEasy[i].cardFace);
+    }
+    for (let i = 0; i < selectedAncient.secondStage.greenCards; i++) {
+        secondStage.push(dataVeryEasy[i].cardFace);
+    }
+    for (let i = 0; i < selectedAncient.secondStage.brownCards; i++) {
+        secondStage.push(dataVeryEasy[i].cardFace);
+    }
+    for (let i = 0; i < selectedAncient.secondStage.blueCards; i++) {
+        secondStage.push(dataVeryEasy[i].cardFace);
+    }
+    for (let i = 0; i < selectedAncient.thirdStage.greenCards; i++) {
+        thirdStage.push(dataVeryEasy[i].cardFace);
+    }
+    for (let i = 0; i < selectedAncient.secondStage.brownCards; i++) {
+        thirdStage.push(dataVeryEasy[i].cardFace);
+    }
+    for (let i = 0; i < selectedAncient.secondStage.blueCards; i++) {
+        thirdStage.push(dataVeryEasy[i].cardFace);
+    }
+
     kneadDeck.classList.remove('openDiff');
     counter.classList.add('openDiff');
     cardBackground.classList.add('openDiff');
     droppedCard.classList.add('openDiff');
+    console.log(secondStage)
 }
 
 kneadDeck.addEventListener('click', startKneadDeck);
