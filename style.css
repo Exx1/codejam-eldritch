@@ -133,6 +133,7 @@ p {
     background: rgb(189, 159, 63);
     border-radius: 50%;
     margin: 5px;
+    
 }
 
 .blue {
@@ -142,6 +143,14 @@ p {
     border-radius: 50%;
     margin: 5px;
 }
+
+.green, .brown, .blue {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
 
 .firstStage {
     display: flex;

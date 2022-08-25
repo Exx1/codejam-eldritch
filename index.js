@@ -398,8 +398,6 @@ let dataNormal = cardsData.filter(item => item.difficulty === 'normal');
 let dataHard = cardsData.filter(item => item.difficulty === 'normal' || item.difficulty === 'hard');
 let dataVeryHard = cardsData.filter(item => item.difficulty === 'hard');
 
-
-
 //Ancients
 // выбор древнего
 
@@ -409,6 +407,8 @@ const iogSothoth = document.querySelector('.iogSothoth');
 const shubNiggurath = document.querySelector('.shubNiggurath');
 const difficultyLevel = document.querySelector('.difficultyLevel');
 const kneadDeck = document.querySelector('.kneadDeck');
+
+
 let ancients = '';
 let diffLevel = '';
 
@@ -560,34 +560,104 @@ normal.addEventListener('click', normalActive);
 hard.addEventListener('click', hardActive);
 veryHard.addEventListener('click', veryHardActive);
 
-ancients = 'azathoth';
-diffLevel = 'veryEasy';
-selectedAncient = ancientsData.find(item => item.id === ancients);
-let countGreen = selectedAncient.firstStage.greenCards + selectedAncient.secondStage.greenCards + selectedAncient.thirdStage.greenCards;
+
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1)); 
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+
 let greenPullarr = [];
-let dataNormalGreen = dataNormal.filter(item => item.color === 'green');
-console.log(countGreen)
 
 function greenPull() {
+    let countGreen = selectedAncient.firstStage.greenCards + selectedAncient.secondStage.greenCards + selectedAncient.thirdStage.greenCards;
+    let dataNormalGreen = dataNormal.filter(item => item.color === 'green');
+    shuffle(dataNormalGreen);
     if (diffLevel === 'veryEasy') {
         greenPullarr = dataVeryEasy.filter(item => item.color === 'green');
-        if (greenPullarr.length - 1 < countGreen) {
-            while (greenPullarr.length - 1 < countGreen) {
-                greenPullarr.push(dataNormalGreen[0]);
+
+        if (greenPullarr.length < countGreen) {
+            let i = 1;
+            while (greenPullarr.length < countGreen) {
+                
+                greenPullarr.push(dataNormalGreen[i]);
+                i++
+            }
+        }
+    } else if (diffLevel === 'easy') {
+
+    }
+    shuffle(greenPullarr);
+}
+
+let brownPullarr;
+
+
+function brownPull() {
+    let countBrown = selectedAncient.firstStage.brownCards + selectedAncient.secondStage.brownCards + selectedAncient.thirdStage.brownCards;
+    let dataNormalBrown = dataNormal.filter(item => item.color === 'brown');
+    shuffle(dataNormalBrown);
+    if (diffLevel === 'veryEasy') {
+        brownPullarr = dataVeryEasy.filter(item => item.color === 'brown');
+    
+        let i = 1;
+        if (brownPullarr.length < countBrown) {
+            while (brownPullarr.length < countBrown) {
+                brownPullarr.push(dataNormalBrown[i]);
+                i++;
             }
         }
     }
+    shuffle(brownPullarr);
 }
 
-let brownPullarr = [];
+
 let bluePullarr = [];
+
+
+function bluePull() {
+    let countBlue = selectedAncient.firstStage.blueCards + selectedAncient.secondStage.blueCards + selectedAncient.thirdStage.blueCards;
+    let dataNormalBlue = dataNormal.filter(item => item.color === 'blue');
+    shuffle(dataNormalBlue);
+    if (diffLevel === 'veryEasy') {
+        bluePullarr = dataVeryEasy.filter(item => item.color === 'blue');
+        if (bluePullarr.length < countBlue) {
+            let i = 1;
+            while (bluePullarr.length < countBlue) {
+                
+                bluePullarr.push(dataNormalBlue[i]);
+                i++;
+            }
+        }
+    }
+    shuffle(bluePullarr);
+}
+
+let FSGreen = document.querySelector('.firstStage .green');
+let greenCounterFS = 0;
+let FSBrown = document.querySelector('.firstStage .brown');
+let brownCounterFS = 0;
+let FSBlue = document.querySelector('.firstStage .blue');
+let blueCounterFS = 0;
+let SSGreen = document.querySelector('.secondStage .green');
+let greenCounterSS = 0;
+let SSBrown = document.querySelector('.secondStage .brown');
+let brownCounterSS = 0;
+let SSBlue = document.querySelector('.secondStage .blue');
+let blueCounterSS = 0;
+let TSGreen = document.querySelector('.thirdStage .green');
+let greenCounterTS = 0;
+let TSBrown = document.querySelector('.thirdStage .brown');
+let brownCounterTS = 0;
+let TSBlue = document.querySelector('.thirdStage .blue');
+let blueCounterTS = 0;
 
 let firstStage = [];
 let secondStage = [];
 let thirdStage = [];
-let greenCards = 0;
-let brownCards = 0;
-let blueCards = 0;
+
+
 
 //Замешиваем колоду
 //Очень легкий уровень сложности
@@ -598,44 +668,134 @@ const cardBackground = document.querySelector('.cardBackground');
 const droppedCard = document.querySelector('.droppedCard');
 
 function startKneadDeck() {
+    let FSGreen = document.querySelector('.firstStage .green');
+    greenCounterFS = 0;
+    brownCounterFS = 0;
+    blueCounterFS = 0;
+    greenCounterSS = 0;
+    brownCounterSS = 0;
+    blueCounterSS = 0;
+    greenCounterTS = 0;
+    brownCounterTS = 0;
+    blueCounterTS = 0;
+
+    greenPullarr = [];
+    brownPullarr = [];
+    bluePullarr = [];
+
+    greenPull();
+    brownPull();
+    bluePull();
+
+
+
     firstStage = [];
     secondStage = [];
     thirdStage = [];
 
     for (let i = 0; i < selectedAncient.firstStage.greenCards; i++) {
-        firstStage.push(dataVeryEasy[i].cardFace);
+        firstStage.push(greenPullarr.pop());
+        greenCounterFS++;
     }
 
     for (let i = 0; i < selectedAncient.firstStage.brownCards; i++) {
-        firstStage.push(dataVeryEasy[i].cardFace);
+        firstStage.push(brownPullarr.pop());
+        brownCounterFS++;
     }
     for (let i = 0; i < selectedAncient.firstStage.blueCards; i++) {
-        firstStage.push(dataVeryEasy[i].cardFace);
+        firstStage.push(bluePullarr.pop());
+        blueCounterFS++;
     }
     for (let i = 0; i < selectedAncient.secondStage.greenCards; i++) {
-        secondStage.push(dataVeryEasy[i].cardFace);
+        secondStage.push(greenPullarr.pop());
+        greenCounterSS++;
     }
     for (let i = 0; i < selectedAncient.secondStage.brownCards; i++) {
-        secondStage.push(dataVeryEasy[i].cardFace);
+        secondStage.push(brownPullarr.pop());
+        brownCounterSS++;
     }
     for (let i = 0; i < selectedAncient.secondStage.blueCards; i++) {
-        secondStage.push(dataVeryEasy[i].cardFace);
+        secondStage.push(bluePullarr.pop());
+        blueCounterSS++;
     }
     for (let i = 0; i < selectedAncient.thirdStage.greenCards; i++) {
-        thirdStage.push(dataVeryEasy[i].cardFace);
+        thirdStage.push(greenPullarr.pop());
+        greenCounterTS++;
     }
-    for (let i = 0; i < selectedAncient.secondStage.brownCards; i++) {
-        thirdStage.push(dataVeryEasy[i].cardFace);
+    for (let i = 0; i < selectedAncient.thirdStage.brownCards; i++) {
+        thirdStage.push(brownPullarr.pop());
+        brownCounterTS++;
     }
-    for (let i = 0; i < selectedAncient.secondStage.blueCards; i++) {
-        thirdStage.push(dataVeryEasy[i].cardFace);
+    for (let i = 0; i < selectedAncient.thirdStage.blueCards; i++) {
+        thirdStage.push(bluePullarr.pop());
+        blueCounterTS++;
     }
-
+    shuffle(firstStage);
+    shuffle(secondStage);
+    shuffle(thirdStage);
     kneadDeck.classList.remove('openDiff');
     counter.classList.add('openDiff');
     cardBackground.classList.add('openDiff');
     droppedCard.classList.add('openDiff');
-    console.log(secondStage)
+    FSGreen.textContent = greenCounterFS;
+    FSBrown.textContent = brownCounterFS;
+    FSBlue.textContent = blueCounterFS
+    SSGreen.textContent = greenCounterSS;
+    SSBrown.textContent = brownCounterSS;
+    SSBlue.textContent = blueCounterSS;
+    TSGreen.textContent = greenCounterTS;
+    TSBrown.textContent = brownCounterTS;
+    TSBlue.textContent = blueCounterTS;
+    console.log(firstStage);
+    console.log(secondStage);
+    console.log(thirdStage);
 }
 
 kneadDeck.addEventListener('click', startKneadDeck);
+
+
+function droppedCards() {
+    if (firstStage.length > 0) {
+        droppedCard.innerHTML = `<img src="${firstStage[firstStage.length - 1].cardFace}" alt="card" width="170px">`;
+        if (firstStage[firstStage.length - 1].color === "green") {
+            greenCounterFS--;
+            FSGreen.innerHTML = greenCounterFS;
+        } else if (firstStage[firstStage.length - 1].color === "blue") {
+            blueCounterFS--;
+            FSBlue.innerHTML = blueCounterFS;
+        } else if (firstStage[firstStage.length - 1].color === "brown") {
+            brownCounterFS--;
+            FSBrown.innerHTML = brownCounterFS;
+        }
+        firstStage.pop();
+    } else if (secondStage.length > 0) {
+        droppedCard.innerHTML = `<img src="${secondStage[secondStage.length - 1].cardFace}" alt="card" width="170px">`;
+        if (secondStage[secondStage.length - 1].color === "green") {
+            greenCounterSS--;
+            SSGreen.innerHTML = greenCounterSS;
+        } else if (secondStage[secondStage.length - 1].color === "blue") {
+            blueCounterSS--;
+            SSBlue.innerHTML = blueCounterSS;
+        } else if (secondStage[secondStage.length - 1].color === "brown") {
+            brownCounterSS--;
+            SSBrown.innerHTML = brownCounterSS;
+        }
+        secondStage.pop();
+    } else if (thirdStage.length > 0) {
+        droppedCard.innerHTML = `<img src="${thirdStage[thirdStage.length - 1].cardFace}" alt="card" width="170px">`;
+        if (thirdStage[thirdStage.length - 1].color === "green") {
+            greenCounterTS--;
+            TSGreen.innerHTML = greenCounterTS;
+        } else if (thirdStage[thirdStage.length - 1].color === "blue") {
+            blueCounterTS--;
+            TSBlue.innerHTML = blueCounterTS;
+        } else if (thirdStage[thirdStage.length - 1].color === "brown") {
+            brownCounterTS--;
+            TSBrown.innerHTML = brownCounterTS;
+        }
+        thirdStage.pop();
+    }
+
+}
+
+cardBackground.addEventListener('click', droppedCards);
