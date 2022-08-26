@@ -586,8 +586,24 @@ function greenPull() {
             }
         }
     } else if (diffLevel === 'easy') {
-
+        greenPullarr = dataEasy.filter(item => item.color === 'green');
+    } else if (diffLevel === 'normal') {
+        greenPullarr = cardsData.filter(item => item.color === 'green');
+    } else if (diffLevel === 'hard') {
+        greenPullarr = dataHard.filter(item => item.color === 'green');
+    } else if (diffLevel === 'veryHard') {
+        greenPullarr = dataVeryHard.filter(item => item.color === 'green');
+    
+        let i = 1;
+        if (greenPullarr.length < countGreen) {
+            while (greenPullarr.length < countGreen) {
+                greenPullarr.push(dataNormalGreen[i]);
+                i++;
+            }
+        }
     }
+
+
     shuffle(greenPullarr);
 }
 
@@ -608,7 +624,25 @@ function brownPull() {
                 i++;
             }
         }
+    } else if (diffLevel === 'easy') {
+        brownPullarr = dataEasy.filter(item => item.color === 'brown');
+    } else if (diffLevel === 'normal') {
+        brownPullarr = cardsData.filter(item => item.color === 'brown');
+    } else if (diffLevel === 'hard') {
+        brownPullarr = dataHard.filter(item => item.color === 'brown');
+    } else if (diffLevel === 'veryHard') {
+        brownPullarr = dataVeryHard.filter(item => item.color === 'brown');
+    
+        let i = 1;
+        if (brownPullarr.length < countBrown) {
+            while (brownPullarr.length < countBrown) {
+                brownPullarr.push(dataNormalBrown[i]);
+                i++;
+            }
+        }
     }
+
+
     shuffle(brownPullarr);
 }
 
@@ -630,7 +664,25 @@ function bluePull() {
                 i++;
             }
         }
+    } else if (diffLevel === 'easy') {
+        bluePullarr = dataEasy.filter(item => item.color === 'blue');
+    } else if (diffLevel === 'normal') {
+        bluePullarr = cardsData.filter(item => item.color === 'blue');
+    } else if (diffLevel === 'hard') {
+        bluePullarr = dataHard.filter(item => item.color === 'blue');
+    } else if (diffLevel === 'veryHard') {
+        bluePullarr = dataVeryHard.filter(item => item.color === 'blue');
+    
+        let i = 1;
+        if (bluePullarr.length < countBlue) {
+            while (bluePullarr.length < countBlue) {
+                bluePullarr.push(dataNormalBlue[i]);
+                i++;
+            }
+        }
     }
+
+
     shuffle(bluePullarr);
 }
 
@@ -669,6 +721,7 @@ const droppedCard = document.querySelector('.droppedCard');
 
 function startKneadDeck() {
     let FSGreen = document.querySelector('.firstStage .green');
+    droppedCard.innerHTML = '';
     greenCounterFS = 0;
     brownCounterFS = 0;
     blueCounterFS = 0;
